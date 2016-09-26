@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2016 at 06:16 PM
+-- Generation Time: Sep 26, 2016 at 10:32 PM
 -- Server version: 5.6.26-enterprise-commercial-advanced-log
 -- PHP Version: 5.5.12
 
@@ -180,7 +180,7 @@ INSERT INTO `state` (`id`, `state`) VALUES
 (1, 'neodobren'),
 (2, 'odobren'),
 (3, 'objavljen'),
-(4, 'deakriviran');
+(4, 'deaktiviran');
 
 -- --------------------------------------------------------
 
