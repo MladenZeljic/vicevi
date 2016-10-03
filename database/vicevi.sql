@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2016 at 10:32 PM
+-- Generation Time: Oct 03, 2016 at 07:50 PM
 -- Server version: 5.6.26-enterprise-commercial-advanced-log
 -- PHP Version: 5.5.12
 
@@ -129,19 +129,6 @@ CREATE TABLE IF NOT EXISTS `joke2category` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `joke2tag`
---
-
-CREATE TABLE IF NOT EXISTS `joke2tag` (
-  `id` int(11) NOT NULL,
-  `joke_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `joke_id` (`joke_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `role`
 --
 
@@ -181,6 +168,19 @@ INSERT INTO `state` (`id`, `state`) VALUES
 (2, 'odobren'),
 (3, 'objavljen'),
 (4, 'deaktiviran');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tag`
+--
+
+CREATE TABLE IF NOT EXISTS `tag` (
+  `id` int(11) NOT NULL,
+  `joke_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `joke_id` (`joke_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
 
 -- --------------------------------------------------------
 
@@ -247,9 +247,9 @@ ALTER TABLE `joke2category`
   ADD CONSTRAINT `joke_category_fk` FOREIGN KEY (`joke_id`) REFERENCES `joke` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `joke2tag`
+-- Constraints for table `tag`
 --
-ALTER TABLE `joke2tag`
+ALTER TABLE `tag`
   ADD CONSTRAINT `tag_joke` FOREIGN KEY (`joke_id`) REFERENCES `joke` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
