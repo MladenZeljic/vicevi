@@ -14,9 +14,9 @@
 		public function rules()
 		{
 			return [
-				[['id','state_id','user_id','joke_id','content','user_nickname'], 'required'],
-				[['id'],'integer'],
+				[['state_id','user_id','joke_id','content','user_nickname'], 'required'],
 				[['content'], 'string'],
+				[['user_nickname'], 'ip','string'],
 			];
 		}
 		public function getJokeComment()

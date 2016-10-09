@@ -14,11 +14,11 @@
 		public function rules()
 		{
 			return [
-				[['id','role_id','firstname','lastname','birth_date','e-mail','password','title'], 'required'],
-				[['id'],'integer'],
+				[['role_id','firstname','lastname','birth_date','e-mail','password','title'], 'required'],
 				[['first_name','lastname'], 'string'],
 				[['birth_date'], 'date'],
 				[['e-mail'], 'email'],
+				[['password'],'min'=>6],
 			];
 		}
 	}

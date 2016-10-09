@@ -14,8 +14,7 @@
 		public function rules()
 		{
 			return [
-				[['id','state_id','title', 'content'], 'required','message' => 'Molimo unesite naziv vica i njegov sadrzaj!'],
-				[['id'],'integer'],
+				[['state_id','title', 'content'], 'required','message' => 'Molimo unesite naziv vica i njegov sadrzaj!'],
 				[['title', 'content'], 'string'],
 			];
 		}

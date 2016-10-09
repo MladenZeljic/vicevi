@@ -14,9 +14,7 @@
 		public function rules()
 		{
 			return [
-				[['id','state'], 'required'],
-				[['id'],'integer'],
-				[['state'], 'string'],
+				[['state'], 'required', 'string'],
 			];
 		}
 	}
