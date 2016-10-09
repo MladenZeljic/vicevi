@@ -14,10 +14,14 @@
 		public function rules()
 		{
 			return [
-				[['state_id','sort_key','title'], 'required','message' => 'Molimo unesite naziv kategorije!'],
+				[['id','state_id','sort_key','title'], 'required','message' => 'Molimo unesite naziv kategorije!'],
 				[['id','sort_key'],'integer'],
 				[['title', 'description','picture_link'], 'string'],
 			];
+		}
+		public function getCategoryState()
+		{
+			return $this->hasOne(State::className(), ['id' => 'state_id']);
 		}
 		public function getJokes()
 		{

@@ -14,7 +14,7 @@
 		public function rules()
 		{
 			return [
-				[['state_id','title', 'content'], 'required','message' => 'Molimo unesite naziv vica i njegov sadrzaj!'],
+				[['id','state_id','title', 'content'], 'required','message' => 'Molimo unesite naziv vica i njegov sadrzaj!'],
 				[['id'],'integer'],
 				[['title', 'content'], 'string'],
 			];
@@ -22,6 +22,10 @@
 		public function getTags()
 		{
 			return $this->hasMany(Tag::className(), ['joke_id' => 'id']);
+		}
+		public function getJokeState()
+		{
+			return $this->hasOne(State::className(), ['id' => 'state_id']);
 		}
 		public function getCategories()
 		{
