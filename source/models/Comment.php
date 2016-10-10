@@ -14,7 +14,7 @@
 		public function rules()
 		{
 			return [
-				[['state_id','user_id','joke_id','content','user_nickname'], 'required'],
+				[['content','user_nickname'], 'required'],
 				[['content'], 'string'],
 				[['user_nickname'], 'ip','string'],
 			];

@@ -14,7 +14,7 @@
 		public function rules()
 		{
 			return [
-				[['state_id','sort_key','title'], 'required','message' => 'Molimo unesite naziv kategorije!'],
+				[['sort_key','title'], 'required','message' => 'Molimo unesite naziv kategorije!'],
 				[['sort_key'],'integer'],
 				[['title', 'description','picture_link'], 'string'],
 			];

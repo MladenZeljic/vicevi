@@ -14,8 +14,8 @@
 		public function rules()
 		{
 			return [
-				[['role_id','firstname','lastname','birth_date','e-mail','password','title'], 'required'],
-				[['first_name','lastname'], 'string'],
+				[['firstname','lastname','birth_date','e-mail','password'], 'required'],
+				[['firstname','lastname'], 'string'],
 				[['birth_date'], 'date'],
 				[['e-mail'], 'email'],
 				[['password'],'min'=>6],
