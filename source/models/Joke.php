@@ -14,7 +14,7 @@
 		public function rules()
 		{
 			return [
-				[[,'title', 'content'], 'required','message' => 'Molimo unesite naziv vica i njegov sadrzaj!'],
+				[['title', 'content'], 'required','message' => 'Molimo unesite naziv vica i njegov sadrzaj!'],
 				[['title', 'content'], 'string'],
 			];
 		}
