@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2016 at 07:50 PM
+-- Generation Time: Oct 11, 2016 at 06:58 PM
 -- Server version: 5.6.26-enterprise-commercial-advanced-log
 -- PHP Version: 5.5.12
 
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `firstname` varchar(15) COLLATE cp1250_croatian_ci NOT NULL,
   `lastname` varchar(15) COLLATE cp1250_croatian_ci NOT NULL,
   `birth_date` date NOT NULL,
-  `e-mail` varchar(25) COLLATE cp1250_croatian_ci NOT NULL,
+  `e_mail` varchar(25) COLLATE cp1250_croatian_ci NOT NULL,
   `password` varchar(20) COLLATE cp1250_croatian_ci NOT NULL,
   `user_status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `role_id`, `firstname`, `lastname`, `birth_date`, `e-mail`, `password`, `user_status`) VALUES
+INSERT INTO `user` (`id`, `role_id`, `firstname`, `lastname`, `birth_date`, `e_mail`, `password`, `user_status`) VALUES
 (1, 1, 'Admin', 'Adminović', '1916-09-07', 'admin.adminovic@admin.ba', 'admin', 1);
 
 --
