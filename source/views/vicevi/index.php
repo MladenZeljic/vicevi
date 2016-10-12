@@ -5,14 +5,13 @@
 	
 	$user=new Account();
 	
-	print Yii::$app->session->getFlash('Poruka'); 
+	print Yii::$app->session->getFlash('Message'); 
 	
-	$form=ActiveForm::begin(['action' => '?r=vicevi/register']);?>
+	$form=ActiveForm::begin(['action' => '?r=vicevi/redirect&var=register']);?>
 	<?= Html::submitButton('Register') ?>
 
 	<?php ActiveForm::end(); 
-
-	$form=ActiveForm::begin(['action' => '?r=vicevi/login']);?>
+	$form=ActiveForm::begin(['action' => '?r=vicevi/redirect&var=login']);?>
 	<?= Html::submitButton('LogIn') ?>
 
 	<?php ActiveForm::end(); ?>

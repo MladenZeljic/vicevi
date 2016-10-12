@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2016 at 06:58 PM
+-- Generation Time: Oct 12, 2016 at 08:29 PM
 -- Server version: 5.6.26-enterprise-commercial-advanced-log
 -- PHP Version: 5.5.12
 
@@ -198,6 +198,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(20) COLLATE cp1250_croatian_ci NOT NULL,
   `user_status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `e_mail` (`e_mail`),
   KEY `role_id` (`role_id`),
   KEY `role_id_2` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
@@ -207,7 +208,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id`, `firstname`, `lastname`, `birth_date`, `e_mail`, `password`, `user_status`) VALUES
-(1, 1, 'Admin', 'Adminović', '1916-09-07', 'admin.adminovic@admin.ba', 'admin', 1);
+(1, 1, 'Admin', 'Adminović', '1916-09-07', 'admin.adminovic@admin.ba', 'admin', 1),
+(2, 3, 'Name', 'Lastname', '1920-01-22', 'mail@mail.ba', 'password123', 1);
 
 --
 -- Constraints for dumped tables

@@ -6,7 +6,6 @@
 	$user=new Account();
 	
 	print Yii::$app->session->getFlash('Poruka'); 
-
 	$form=ActiveForm::begin(['action' => '?r=vicevi/']);?>
 	<?= Html::submitButton('LogOut') ?>
 
