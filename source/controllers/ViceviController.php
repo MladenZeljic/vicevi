@@ -27,9 +27,6 @@
 			if($account->load(Yii::$app->request->post()))
 			{	
 				$account->birth_date=date('Y-m-d', strtotime($account->birth_date));
-				$account->role_id=3;
-				$account->user_status=1;
-				$account->id=Account::find()->orderBy(['id' => SORT_DESC])->one()->id+1;
 				try 
 				{
 					if($account->save())

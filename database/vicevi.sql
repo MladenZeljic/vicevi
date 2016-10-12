@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2016 at 08:29 PM
+-- Generation Time: Oct 12, 2016 at 09:48 PM
 -- Server version: 5.6.26-enterprise-commercial-advanced-log
 -- PHP Version: 5.5.12
 
@@ -27,15 +27,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `category` (
-  `id` int(11) NOT NULL,
-  `state_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_id` int(11) NOT NULL DEFAULT '1',
   `sort_key` int(11) NOT NULL,
   `title` varchar(15) COLLATE cp1250_croatian_ci NOT NULL,
   `description` text COLLATE cp1250_croatian_ci,
   `picture_link` text COLLATE cp1250_croatian_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `state_id` (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `category` (
 --
 
 CREATE TABLE IF NOT EXISTS `category_fictive` (
-  `id` int(11) NOT NULL,
-  `state_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_id` int(11) NOT NULL DEFAULT '1',
   `sort_key` int(11) NOT NULL,
   `title` varchar(20) COLLATE cp1250_croatian_ci NOT NULL,
   `description` text COLLATE cp1250_croatian_ci NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `category_fictive` (
   `search_string` varchar(20) COLLATE cp1250_croatian_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `state_id` (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS `category_fictive` (
 --
 
 CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) NOT NULL,
-  `state_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_id` int(11) NOT NULL DEFAULT '1',
   `user_id` int(11) NOT NULL,
   `joke_id` int(11) NOT NULL,
   `content` text COLLATE cp1250_croatian_ci NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   KEY `state_id` (`state_id`),
   KEY `user_id_2` (`user_id`),
   KEY `joke_id_2` (`joke_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -91,8 +91,8 @@ CREATE TABLE IF NOT EXISTS `comment` (
 --
 
 CREATE TABLE IF NOT EXISTS `joke` (
-  `id` int(11) NOT NULL,
-  `state_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state_id` int(11) NOT NULL DEFAULT '1',
   `title` varchar(20) COLLATE cp1250_croatian_ci NOT NULL,
   `content` text COLLATE cp1250_croatian_ci NOT NULL,
   `sending_date` date NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `joke` (
   PRIMARY KEY (`id`),
   KEY `state_id` (`state_id`),
   KEY `state_id_2` (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `joke` (
 --
 
 CREATE TABLE IF NOT EXISTS `joke2category` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `joke_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `joke2category` (
   KEY `id_category` (`category_id`),
   KEY `id_joke_3` (`joke_id`),
   KEY `id_category_3` (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -133,10 +133,10 @@ CREATE TABLE IF NOT EXISTS `joke2category` (
 --
 
 CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(15) COLLATE cp1250_croatian_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `role`
@@ -154,10 +154,10 @@ INSERT INTO `role` (`id`, `title`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `state` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(15) COLLATE cp1250_croatian_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `state`
@@ -176,11 +176,11 @@ INSERT INTO `state` (`id`, `state`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tag` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `joke_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `joke_id` (`joke_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -189,8 +189,8 @@ CREATE TABLE IF NOT EXISTS `tag` (
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL DEFAULT '3',
   `firstname` varchar(15) COLLATE cp1250_croatian_ci NOT NULL,
   `lastname` varchar(15) COLLATE cp1250_croatian_ci NOT NULL,
   `birth_date` date NOT NULL,
@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `e_mail` (`e_mail`),
   KEY `role_id` (`role_id`),
   KEY `role_id_2` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `user`
@@ -209,7 +209,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `role_id`, `firstname`, `lastname`, `birth_date`, `e_mail`, `password`, `user_status`) VALUES
 (1, 1, 'Admin', 'Adminović', '1916-09-07', 'admin.adminovic@admin.ba', 'admin', 1),
-(2, 3, 'Name', 'Lastname', '1920-01-22', 'mail@mail.ba', 'password123', 1);
+(7, 3, 'Name', 'Lastname', '1978-12-15', 'mail@mail.ba', 'password123', 1),
+(9, 3, 'Name', 'Lastname', '1978-12-15', 'fasfa@mail.ba', 'password123', 1);
 
 --
 -- Constraints for dumped tables
@@ -239,7 +240,7 @@ ALTER TABLE `comment`
 -- Constraints for table `joke`
 --
 ALTER TABLE `joke`
-  ADD CONSTRAINT `joke_state` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `joke_state_fk` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `joke2category`
