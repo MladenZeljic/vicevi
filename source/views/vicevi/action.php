@@ -25,9 +25,10 @@
 		$button='LogIn';
 	}
 	?>
+	
 	<?= $form->field($user, 'e_mail')->textInput(['value'=>$user->e_mail])->label('E-mail')?>
 	<?= Yii::$app->session->getFlash('Message') ?>
-	<?= $form->field($user, 'password')->textInput(['value'=>$user->password])->label('Password')?>
+	<?= $form->field($user, 'password')->passwordInput(['value'=>$user->password])->label('Password')?>
 	
 	<?= Html::submitButton($button) ?>
 
