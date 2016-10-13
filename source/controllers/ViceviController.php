@@ -27,16 +27,14 @@
 			if($account->load(Yii::$app->request->post()))
 			{	
 				$account->birth_date=date('Y-m-d', strtotime($account->birth_date));
-				try 
+				$found=Account::findOne(['e_mail'=>$account->e_mail]);
+				if(!$found){
+					$account->save();
+					Yii::$app->getSession()->setFlash('Message',  'Successful register!');
+					return $this->render('index');
+				}
+				else
 				{
-					if($account->save())
-					{
-						return $this->render('index');
-					}
-				} 
-				catch (\yii\db\Exception $e) 
-				{
-					$account->addError(null, $e->getMessage());
 					$account->e_mail="";
 					Yii::$app->getSession()->setFlash('Message',  'Duplicate e-mail!');
 					return $this->render('action',['var1'=>'repeat','account'=>$account]);
@@ -50,6 +48,8 @@
 			$found=Account::findOne(['e_mail'=>$account->e_mail,'password' =>$account->password,]);
 			$path='index';
 			if($found){
+				$found->user_logged=1;
+				$found->save();
 				\Yii::$app->getSession()->setFlash('Message', 'Successful login!');
 				$path='account';
 			}
@@ -58,6 +58,14 @@
 				\Yii::$app->getSession()->setFlash('Message', 'Login has failed!');
 			}
 			return $this->render($path);
+		}
+		public function actionLogout()
+		{
+			$found=Account::findOne(['user_logged'=>'1',]);
+			$found->user_logged=0;
+			$found->save();
+			\Yii::$app->getSession()->setFlash('Message', 'Successful logout!');
+			return $this->render('index');
 		}
 	}
 ?>

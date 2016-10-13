@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2016 at 09:48 PM
+-- Generation Time: Oct 13, 2016 at 09:34 PM
 -- Server version: 5.6.26-enterprise-commercial-advanced-log
 -- PHP Version: 5.5.12
 
@@ -197,20 +197,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   `e_mail` varchar(25) COLLATE cp1250_croatian_ci NOT NULL,
   `password` varchar(20) COLLATE cp1250_croatian_ci NOT NULL,
   `user_status` tinyint(1) NOT NULL DEFAULT '1',
+  `user_logged` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `e_mail` (`e_mail`),
   KEY `role_id` (`role_id`),
   KEY `role_id_2` (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `role_id`, `firstname`, `lastname`, `birth_date`, `e_mail`, `password`, `user_status`) VALUES
-(1, 1, 'Admin', 'Adminović', '1916-09-07', 'admin.adminovic@admin.ba', 'admin', 1),
-(7, 3, 'Name', 'Lastname', '1978-12-15', 'mail@mail.ba', 'password123', 1),
-(9, 3, 'Name', 'Lastname', '1978-12-15', 'fasfa@mail.ba', 'password123', 1);
+INSERT INTO `user` (`id`, `role_id`, `firstname`, `lastname`, `birth_date`, `e_mail`, `password`, `user_status`, `user_logged`) VALUES
+(1, 3, 'Admin', 'Adminović', '1935-09-23', 'admin.adminovic@mail.ba', 'admin', 1, 0);
 
 --
 -- Constraints for dumped tables
