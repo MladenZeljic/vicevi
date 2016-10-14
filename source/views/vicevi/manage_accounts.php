@@ -4,7 +4,6 @@
 	use app\models\Account;
 	
 	$user=new Account();
-	$this->title='Home';
-	print Yii::$app->session->getFlash('Message'); 
 	
+	$this->title='Manage accounts';
 	?>

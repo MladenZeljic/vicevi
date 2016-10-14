@@ -5,5 +5,6 @@
 	
 	$user=new Account();
 	
+	$this->title='Admin account';
 	print Yii::$app->session->getFlash('Message');
 	?>

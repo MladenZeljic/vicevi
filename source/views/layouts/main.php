@@ -10,6 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\Account;
+use app\models\Log;
 
 AppAsset::register($this);
 ?>
@@ -29,34 +30,72 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-	$account=Account::findOne(['user_logged'=>'1']);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/vicevi/index']],
-            ['label' => 'Register', 'url' => Url::toRoute(['vicevi/redirect', 'var' => 'register'])],
-            !$account ? (
-                ['label' => 'Login', 'url' => ['/vicevi/redirect']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/vicevi/logout'], 'post', ['class' => 'navbar-form'])
-                . Html::submitButton(
-                    'Logout (' . $account->e_mail . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
+	$log=new Log();
+	$guest=true;
+	if($log=Log::find()->count()>0)
+	{
+		$guest=false;
+		$log=Log::find()->where(['user_ip'=>Yii::$app->getRequest()->getUserIP()])->one();
+	}
+	if(!$log)
+	{
+		echo Nav::widget([
+			'options' => ['class' => 'navbar-nav navbar-right'],
+			'items' => [
+				['label' => 'Home', 'url' => ['/vicevi/index']],
+				['label' => 'Register', 'url' => ['vicevi/register']],
+				['label' => 'Login', 'url' => ['/vicevi/login']],
+			],
+		]);
+	}
+	else
+	{
+		if($log->acLog->userRole->title=='admin')
+		{
+			echo Nav::widget([
+				'options' => ['class' => 'navbar-nav navbar-right'],
+				'items' => [
+					['label' => 'Home', 'url' => ['/vicevi/index']],
+					['label' => 'Profile', 'url' => ['/vicevi/admin']],
+					['label' => 'Manage accounts', 'url' => ['/vicevi/accounts']],
+					['label' => 'Manage jokes', 'url' => ['/vicevi/jokes']],
+					['label' => 'Manage comments', 'url' => ['/vicevi/comments']],
+					['label' => 'Logout', 'url' => ['/vicevi/logout','id' => $log->acLog->id]],
+				],
+			]);
+		}
+		else if($log->acLog->userRole->title=='moderator')
+		{
+			echo Nav::widget([
+				'options' => ['class' => 'navbar-nav navbar-right'],
+				'items' => [
+					['label' => 'Home', 'url' => ['/vicevi/index']],
+					['label' => 'Profile', 'url' => ['/vicevi/moderator']],
+					['label' => 'Manage accounts', 'url' => ['/vicevi/accounts']],
+					['label' => 'Manage jokes', 'url' => ['/vicevi/jokes']],
+					['label' => 'Manage comments', 'url' => ['/vicevi/comments']],
+					['label' => 'Logout', 'url' => ['/vicevi/logout','id' => $log->acLog->id]],
+				],
+			]);
+		}
+		else
+		{
+			echo Nav::widget([
+				'options' => ['class' => 'navbar-nav navbar-right'],
+				'items' => [
+					['label' => 'Home', 'url' => ['/vicevi/index']],
+					['label' => 'Profile', 'url' => ['/vicevi/user']],
+					['label' => 'Logout', 'url' => ['/vicevi/logout','id' => $log->acLog->id]],
+				],
+			]);
+		}
+	}
+	NavBar::end();
+	?>
 
     <div class="container">
         <?= Breadcrumbs::widget([
@@ -68,7 +107,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Vicevi <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

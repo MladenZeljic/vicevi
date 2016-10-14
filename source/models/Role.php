@@ -17,5 +17,9 @@
 				[['title'], 'required', 'string'],
 			];
 		}
+		public function getRoleUser()
+		{
+			return $this->hasMany(Account::className(),['role_id'=>'id']);
+		}
 	}
 ?>

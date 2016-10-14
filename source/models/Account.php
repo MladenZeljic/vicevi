@@ -18,5 +18,13 @@
 				[['password'],'string','min'=>6],
 			];
 		}
+		public function getLog()
+		{
+			return $this->hasMany(Log::className(), ['user_id' => 'id' ]);
+		}
+		public function getUserRole()
+		{
+			return $this->hasOne(Role::className(),['id'=>'role_id']);
+		}
 	}
 ?>

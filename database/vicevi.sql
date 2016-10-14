@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2016 at 09:34 PM
+-- Generation Time: Oct 14, 2016 at 06:37 PM
 -- Server version: 5.6.26-enterprise-commercial-advanced-log
 -- PHP Version: 5.5.12
 
@@ -129,6 +129,20 @@ CREATE TABLE IF NOT EXISTS `joke2category` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `log`
+--
+
+CREATE TABLE IF NOT EXISTS `log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_ip` varchar(11) COLLATE cp1250_croatian_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=42 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `role`
 --
 
@@ -194,22 +208,23 @@ CREATE TABLE IF NOT EXISTS `user` (
   `firstname` varchar(15) COLLATE cp1250_croatian_ci NOT NULL,
   `lastname` varchar(15) COLLATE cp1250_croatian_ci NOT NULL,
   `birth_date` date NOT NULL,
-  `e_mail` varchar(25) COLLATE cp1250_croatian_ci NOT NULL,
+  `e_mail` varchar(50) COLLATE cp1250_croatian_ci NOT NULL,
   `password` varchar(20) COLLATE cp1250_croatian_ci NOT NULL,
   `user_status` tinyint(1) NOT NULL DEFAULT '1',
-  `user_logged` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `e_mail` (`e_mail`),
   KEY `role_id` (`role_id`),
   KEY `role_id_2` (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1250 COLLATE=cp1250_croatian_ci AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `role_id`, `firstname`, `lastname`, `birth_date`, `e_mail`, `password`, `user_status`, `user_logged`) VALUES
-(1, 3, 'Admin', 'Adminović', '1935-09-23', 'admin.adminovic@mail.ba', 'admin', 1, 0);
+INSERT INTO `user` (`id`, `role_id`, `firstname`, `lastname`, `birth_date`, `e_mail`, `password`, `user_status`) VALUES
+(1, 1, 'Admin', 'Adminović', '1958-10-03', 'admin.adminovic@mail.ba', 'admin123', 1),
+(2, 2, 'Moderator', 'Moderatović', '1987-10-05', 'moderator.moderatovic@mail.ba', 'moderator123', 1),
+(25, 3, 'Mladen', 'Zeljić', '1993-10-25', 'mladen_zeljic@hotmail.com', 'sifra123', 1);
 
 --
 -- Constraints for dumped tables
@@ -247,6 +262,12 @@ ALTER TABLE `joke`
 ALTER TABLE `joke2category`
   ADD CONSTRAINT `category_joke` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `joke_category_fk` FOREIGN KEY (`joke_id`) REFERENCES `joke` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `log`
+--
+ALTER TABLE `log`
+  ADD CONSTRAINT `user_log` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tag`

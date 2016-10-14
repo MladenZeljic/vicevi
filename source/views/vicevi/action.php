@@ -8,6 +8,7 @@
 	
 	if($var1=='register' or $var1=='repeat')
 	{
+		$this->title='User Registration';
 		if($var1=='repeat'){
 			$user=$account;
 		}
@@ -21,6 +22,7 @@
 	}
 	else
 	{
+		$this->title='User Login';
 		$form=ActiveForm::begin(['action' => '?r=vicevi/acclogin']);
 		$button='LogIn';
 	}

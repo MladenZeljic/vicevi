@@ -3,6 +3,7 @@
 	use Yii;
 	use yii\web\Controller;
 	use app\models\Account;
+	use app\models\Log;
 	
 	class ViceviController extends Controller
 	{
@@ -10,16 +11,37 @@
 		{
 			return $this->render('index');
 		}
-		public function actionRedirect()
+		public function actionRegister()
 		{
-			$var1=Yii::$app->getRequest()->getQueryParam('var');
-			if($var1=='register'){
-				return $this->render('action',['var1'=>$var1]);
-			}
-			else
-			{
-				return $this->render('action',['var1'=>$var1]);
-			}
+			return $this->render('action',['var1'=>'register']);
+		}
+		public function actionLogin()
+		{
+			return $this->render('action',['var1'=>'login']);
+		}
+		public function actionAccounts()
+		{
+			return $this->render('manage_accounts');
+		}
+		public function actionJokes()
+		{
+			return $this->render('manage_jokes');
+		}
+		public function actionComments()
+		{
+			return $this->render('manage_comments');
+		}
+		public function actionAdmin()
+		{
+			return $this->render('admin_account');
+		}
+		public function actionModerator()
+		{
+			return $this->render('moderator_account');
+		}
+		public function actionUser()
+		{
+			return $this->render('user_account');
 		}
 		public function actionAccregist()
 		{
@@ -44,14 +66,17 @@
 		public function actionAcclogin()
 		{
 			$account=new Account();
+			$log=new Log();
 			$account->attributes=\Yii::$app->request->post('Account');
-			$found=Account::findOne(['e_mail'=>$account->e_mail,'password' =>$account->password,]);
+			$log->user_ip=Yii::$app->getRequest()->getUserIP();
+			$found=Account::find()->where(['e_mail'=>$account->e_mail])->one();
 			$path='index';
 			if($found){
-				$found->user_logged=1;
-				$found->save();
+				$log->user_id=$found->id;
+				$log->save();
 				\Yii::$app->getSession()->setFlash('Message', 'Successful login!');
-				$path='account';
+				$found->userRole->title=='admin' ?  $path='admin_account' :
+				($found->userRole->title=='moderator' ?  $path='moderator_account' : $path='user_account');
 			}
 			else
 			{
@@ -61,9 +86,9 @@
 		}
 		public function actionLogout()
 		{
-			$found=Account::findOne(['user_logged'=>'1',]);
-			$found->user_logged=0;
-			$found->save();
+			$id=Yii::$app->getRequest()->getQueryParam('id');
+			$found=Log::findOne(['user_id'=>$id]);
+			$found->delete();
 			\Yii::$app->getSession()->setFlash('Message', 'Successful logout!');
 			return $this->render('index');
 		}
