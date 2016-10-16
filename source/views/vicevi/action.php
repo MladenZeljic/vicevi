@@ -32,5 +32,6 @@
 	<?= Yii::$app->session->getFlash('Message') ?>
 	<?= $form->field($user, 'password')->passwordInput(['value'=>$user->password])->label('Password')?>
 	
+	<?= Html::submitButton($button, ['class' => 'btn btn-primary btn-xs','style'=>['background-color'=>'#222222','border'=>'none','height'=>'30px']]) ?>
 
 <?php ActiveForm::end(); ?>
