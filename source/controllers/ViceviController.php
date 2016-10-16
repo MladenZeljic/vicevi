@@ -52,6 +52,7 @@
 				$account->birth_date=date('Y-m-d', strtotime($account->birth_date));
 				$found=Account::findOne(['e_mail'=>$account->e_mail]);
 				if(!$found){
+					$account->role_id=3;
 					$account->save();
 					Yii::$app->getSession()->setFlash('Message',  'Successful register!');
 					return $this->render('index');
