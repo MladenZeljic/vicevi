@@ -47,7 +47,7 @@ AppAsset::register($this);
 	echo Html::input('type:text','search','',['placeholder'=>'Search...','class'=>'form-control']);
 	echo '<span class="input-group-btn">';
 	echo Html::submitButton('<span class="glyphicon glyphicon-search"></span>',[
-		'class'=>'btn btn-link',
+		'class'=>'btn btn-link'
 	]);
 	echo'</span></div>';
 	ActiveForm::end();

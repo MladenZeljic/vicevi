@@ -14,6 +14,5 @@
 	<?= $form->field($user, 'password')->passwordInput(['value'=>$user->password])->label('Password')?>
 	<?= $form->field($user, 'role_id')->dropdownList($role,['prompt'=>'Please choose user role:'])->label('User role')?>
 	
-	<?= Html::submitButton('Update') ?>
 
 <?php ActiveForm::end(); ?>
