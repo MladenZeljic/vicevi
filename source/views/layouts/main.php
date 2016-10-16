@@ -10,6 +10,8 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\Account;
+use app\models\Joke;
+use yii\bootstrap\ActiveForm;
 use app\models\Log;
 
 AppAsset::register($this);
@@ -34,6 +36,22 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+	ActiveForm::begin([
+		'action'=>['vicevi/search'],
+		'method'=>'get',
+		'options'=>[
+			'class'=>'navbar-form navbar-left'
+		]
+	]);
+	echo'<div class="input-group input-group-sm">';
+	echo Html::input('type:text','search','',['placeholder'=>'Search...','class'=>'form-control']);
+	echo '<span class="input-group-btn">';
+	echo Html::submitButton('<span class="glyphicon glyphicon-search"></span>',[
+		'class'=>'btn btn-link',
+	]);
+	echo'</span></div>';
+	ActiveForm::end();
+		
 	$log=new Log();
 	$guest=true;
 	if($log=Log::find()->count()>0)
@@ -41,6 +59,7 @@ AppAsset::register($this);
 		$guest=false;
 		$log=Log::find()->where(['user_ip'=>Yii::$app->getRequest()->getUserIP()])->one();
 	}
+	
 	if(!$log)
 	{
 		echo Nav::widget([
@@ -61,9 +80,11 @@ AppAsset::register($this);
 				'items' => [
 					['label' => 'Home', 'url' => ['/vicevi/index']],
 					['label' => 'Profile', 'url' => ['/vicevi/admin']],
-					['label' => 'Manage accounts', 'url' => ['/vicevi/accounts']],
-					['label' => 'Manage jokes', 'url' => ['/vicevi/jokes']],
-					['label' => 'Manage comments', 'url' => ['/vicevi/comments']],
+					['label' => 'Manage accounts','url' => ['/vicevi/manage_accounts']],
+			
+					
+					['label' => 'Manage jokes', 'url' => ['/vicevi/jokes','action' => 'jokes']],
+					['label' => 'Manage comments', 'url' => ['/vicevi/comments','action' => 'comments']],
 					['label' => 'Logout', 'url' => ['/vicevi/logout','id' => $log->acLog->id]],
 				],
 			]);

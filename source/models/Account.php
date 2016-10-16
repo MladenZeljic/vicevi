@@ -12,10 +12,12 @@
 		public function rules()
 		{
 			return [
-				[['firstname','lastname','birth_date','e_mail','password'], 'required'],
-				[['firstname','lastname'], 'string'],
+				[['firstname','lastname','birth_date','e_mail','password','role_id'], 'required'],
+				[['role_id'],'integer'],
+				[['firstname','lastname'], 'string','max'=>30],
+				[['e_mail'],'string', 'max'=>50],
 				[['e_mail'], 'email'],
-				[['password'],'string','min'=>6],
+				[['password'],'string','min'=>6,'max'=>20],
 			];
 		}
 		public function getLog()
